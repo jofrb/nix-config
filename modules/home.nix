@@ -52,6 +52,15 @@
       grbc = "git rebase --continue";
       "gcn!" = "git commit --amend --no-edit";
     };
+
+    initContent = ''
+      # Bitwarden SSH agent — resolve socket dynamically regardless of distribution/Team ID
+      # Requires: Bitwarden Desktop → Settings → SSH Agent → enabled
+      _bw_sock=$(lsof -U 2>/dev/null | awk '/bitwarden-ssh-agent\.sock/ {print $NF; exit}')
+      if [[ -S "$_bw_sock" ]]; then
+        export SSH_AUTH_SOCK="$_bw_sock"
+      fi
+    '';
   };
 
   # ── Tmux ──────────────────────────────────────────────────────────────────────

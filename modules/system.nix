@@ -65,6 +65,7 @@
   # ── Homebrew ─────────────────────────────────────────────────────────────────
   homebrew = {
     enable = true;
+    user = "froeb";
     onActivation = {
       cleanup = "zap";
       autoUpdate = true;
