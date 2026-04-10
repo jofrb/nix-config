@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, ... }: {
+  outputs = { nixpkgs, nix-darwin, home-manager, ... }: {
     darwinConfigurations."MacGyverBook-pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
