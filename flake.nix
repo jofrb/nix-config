@@ -14,6 +14,8 @@
   };
 
   outputs = { nixpkgs, nix-darwin, home-manager, ... }: {
+    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
+
     darwinConfigurations."MacGyverBook-pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
