@@ -19,6 +19,7 @@
       minimize-to-application   = true;
       orientation               = "left";
       show-recents              = false;
+      showAppExposeGestureEnabled = true;
     };
 
     finder = {
