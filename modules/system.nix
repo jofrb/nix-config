@@ -1,12 +1,12 @@
 { pkgs, ... }:
 
 {
-  # ── Nix daemon ──────────────────────────────────────────────────────────────
+  # ── Nix daemon ──────────────────────────────────────────────
   # Determinate Systems manages its own Nix daemon — disable nix-darwin's.
   # flakes + nix-command are already enabled by Determinate.
   nix.enable = false;
 
-  # ── macOS system defaults ────────────────────────────────────────────────────
+  # ── macOS system defaults ────────────────────────────────────────────
   system.defaults = {
     dock = {
       autohide                  = true;
@@ -63,59 +63,9 @@
     remapCapsLockToEscape = false; # managed by Hyperkey
   };
 
-  # ── Homebrew ─────────────────────────────────────────────────────────────────
-  homebrew = {
-    enable = true;
-    user = "froeb";
-    onActivation = {
-      cleanup = "zap";
-      autoUpdate = true;
-      upgrade = true;
-    };
-
-    casks = [
-      "aldente"
-      "bitwarden"   # direct download — required for SSH agent (App Store version is sandboxed)
-      "hyperkey"
-      "bruno"
-      "claude-code"
-      "dropbox"
-      "fluor"
-      "freecad"
-      "ghostty"
-      "google-chrome"
-      "google-drive"
-      "gpg-suite"
-      "linear-linear"
-      "messenger"
-      "notion"
-      "obsidian"
-      "raycast"
-      "remarkable"
-      "slack"
-      "zed"
-    ];
-
-    brews = [
-      "mas"
-    ];
-
-    masApps = {
-      "No Distractions for YouTube" = 1482507016;
-      "NextDNS"                     = 1464122853;
-      "OneDrive"                    = 823766827;
-      "Tailscale"                   = 1475387142;
-      "WireGuard"                   = 1451685025;
-      "Xcode"                       = 497799835;
-      "Magnet"                      = 441258766;
-      "Wipr 2"                      = 1662217862;
-      "Xerox Print and Scan"        = 6443456959;
-    };
-  };
-
   system.primaryUser = "froeb";
 
-  # ── Users ────────────────────────────────────────────────────────────────────
+  # ── Users ────────────────────────────────────────────────────────────────────────
   users.users.froeb = {
     name = "froeb";
     home = "/Users/froeb";
