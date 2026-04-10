@@ -5,6 +5,13 @@
   home.username = "froeb";
   home.homeDirectory = "/Users/froeb";
 
+  # ── Environment variables ─────────────────────────────────────────────────────
+  home.sessionVariables = {
+    DOCKER_DEFAULT_PLATFORM = "linux/amd64";
+    LANG                    = "en_US.UTF-8";
+    CLOUD_SQL_PATH_PREFIX   = "/Users/froeb/temp";
+  };
+
   # ── CLI packages ─────────────────────────────────────────────────────────────
   home.packages = with pkgs; [
     bat       # better cat
@@ -54,6 +61,9 @@
     };
 
     initContent = ''
+      # Homebrew
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+
       # Bitwarden SSH agent — resolve socket dynamically regardless of distribution/Team ID
       # Requires: Bitwarden Desktop → Settings → SSH Agent → enabled
       _bw_sock=$(lsof -U 2>/dev/null | awk '/bitwarden-ssh-agent\.sock/ {print $NF; exit}')
