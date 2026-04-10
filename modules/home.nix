@@ -20,6 +20,7 @@
     fzf       # fuzzy finder
     gh        # GitHub CLI
     bottom    # process viewer (binary: btm)
+    wget
     jq        # JSON processor
     ripgrep   # better grep
     pkgs.nerd-fonts.jetbrains-mono

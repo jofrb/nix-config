@@ -18,7 +18,6 @@
       system = "aarch64-darwin";
       modules = [
         ./modules/system.nix
-        ./modules/packages.nix
         ./modules/homebrew.nix
         home-manager.darwinModules.home-manager
         {
