@@ -46,6 +46,9 @@
       ll  = "eza -lah --icons";
       find  = "fd";
       gst = "git status";
+      gcmsg = "git commit -m";
+      ga = "git add ";
+      gaa = "git add .";
       gco = "git checkout";
       gcb = "git checkout -b";
       gp  = "git push";
