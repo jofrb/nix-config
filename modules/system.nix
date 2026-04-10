@@ -35,7 +35,7 @@
       AppleInterfaceStyle = "Dark";
       AppleKeyboardUIMode = 3;
       KeyRepeat        = 1;
-      InitialKeyRepeat = 8;
+      InitialKeyRepeat = 10;
       NSAutomaticSpellingCorrectionEnabled = true;
       NSAutomaticCapitalizationEnabled     = true;
       NSAutomaticQuoteSubstitutionEnabled = false;
@@ -45,7 +45,7 @@
       NSNavPanelExpandedStateForSaveMode  = true;
       PMPrintingExpandedStateForPrint     = true;
       "com.apple.trackpad.scaling" = 3.0;
-      "com.apple.swipescrolldirection" = false;
+      "com.apple.swipescrolldirection" = true;
     };
 
     trackpad = {
