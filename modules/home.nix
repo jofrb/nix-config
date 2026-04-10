@@ -90,13 +90,22 @@
 
       # What shows on each line and in what order
       format = lib.concatStrings [
+        "$username"
+        "$hostname"
         "$directory"
         "$git_branch"
         "$git_status"
+        "$nodejs"
+        "$docker_context"
         "$nix_shell"
         "$cmd_duration"
         "$line_break"
         "$character"
+      ];
+
+      right_format = lib.concatStrings [
+        "$battery"
+        "$time"
       ];
 
       directory = {
@@ -136,6 +145,51 @@
       character = {
         success_symbol = "[❯](bold green)";
         error_symbol   = "[❯](bold red)";
+      };
+
+      username = {
+        show_always = false;  # only show when SSH or root
+        style_user  = "bold green";
+        style_root  = "bold red";
+        format      = "[$user]($style) ";
+      };
+
+      hostname = {
+        ssh_only = true;
+        style    = "bold yellow";
+        format   = "[@$hostname]($style) ";
+      };
+
+      nodejs = {
+        symbol = " ";
+        style  = "bold green";
+        format = "[$symbol$version]($style) ";
+      };
+
+      docker_context = {
+        symbol = " ";
+        style  = "bold blue";
+        format = "[$symbol$context]($style) ";
+        only_with_files = true;
+      };
+
+      battery = {
+        full_symbol        = "󰁹 ";
+        charging_symbol    = "󰂄 ";
+        discharging_symbol = "󰂃 ";
+        format = "[$symbol$percentage]($style) ";
+        display = [
+          { threshold = 20; style = "bold red"; }
+          { threshold = 40; style = "bold yellow"; }
+          { threshold = 75; style = "bold green"; }
+        ];
+      };
+
+      time = {
+        disabled    = false;
+        format      = "[🕐 $time]($style) ";
+        style       = "dimmed white";
+        time_format = "%H:%M";
       };
     };
   };
