@@ -23,6 +23,8 @@
     wget
     jq        # JSON processor
     ripgrep   # better grep
+    statix    # nix linters
+    deadnix   # nix linters
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
@@ -41,7 +43,9 @@
     };
 
     shellAliases = {
-      nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName)";
+      nrs   = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName)";
+      nfmt  = "nix fmt ~/.config/nix-config";
+      nlint = "statix check ~/.config/nix-config && deadnix ~/.config/nix-config";
       cat = "bat";
       ls  = "eza --icons";
       ll  = "eza -lah --icons";
