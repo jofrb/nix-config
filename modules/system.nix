@@ -9,16 +9,16 @@ _:
   # ── macOS system defaults ────────────────────────────────────────────
   system.defaults = {
     dock = {
-      autohide                  = true;
-      autohide-delay            = 0.03;
-      autohide-time-modifier    = 0.03;
-      magnification             = true;
-      tilesize                  = 35;
-      largesize                 = 42;
-      mineffect                 = "scale";
-      minimize-to-application   = true;
-      orientation               = "left";
-      show-recents              = false;
+      autohide = true;
+      autohide-delay = 0.03;
+      autohide-time-modifier = 0.03;
+      magnification = true;
+      tilesize = 35;
+      largesize = 42;
+      mineffect = "scale";
+      minimize-to-application = true;
+      orientation = "left";
+      show-recents = false;
       showAppExposeGestureEnabled = true;
     };
 
@@ -35,16 +35,16 @@ _:
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
       AppleKeyboardUIMode = 3;
-      KeyRepeat        = 1;
+      KeyRepeat = 1;
       InitialKeyRepeat = 10;
       NSAutomaticSpellingCorrectionEnabled = true;
-      NSAutomaticCapitalizationEnabled     = true;
+      NSAutomaticCapitalizationEnabled = true;
       NSAutomaticQuoteSubstitutionEnabled = false;
-      NSAutomaticDashSubstitutionEnabled   = true;
+      NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticPeriodSubstitutionEnabled = true;
-      AppleShowScrollBars        = "Always";
-      NSNavPanelExpandedStateForSaveMode  = true;
-      PMPrintingExpandedStateForPrint     = true;
+      AppleShowScrollBars = "Always";
+      NSNavPanelExpandedStateForSaveMode = true;
+      PMPrintingExpandedStateForPrint = true;
       "com.apple.trackpad.scaling" = 3.0;
       "com.apple.swipescrolldirection" = true;
     };
@@ -52,7 +52,7 @@ _:
     trackpad = {
       Clicking = true;
       TrackpadThreeFingerDrag = true;
-      TrackpadRightClick      = true;
+      TrackpadRightClick = true;
     };
 
     screensaver.askForPasswordDelay = 0;

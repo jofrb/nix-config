@@ -3,11 +3,13 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-  outputs = { nixpkgs, ... }:
+  outputs =
+    { nixpkgs, ... }:
     let
       system = "aarch64-darwin";
-      pkgs   = nixpkgs.legacyPackages.${system};
-    in {
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
           # Add project-specific tools here, e.g.:
