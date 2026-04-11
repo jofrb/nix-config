@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+# cheat: Quick reference for common commands and aliases
+# Usage: cheat [-git|-tmux|-nix|-atuin|-direnv]
+
+filter=""
+if [[ $# -gt 0 ]]; then
+  case "$1" in
+    -git|-tmux|-nix|-atuin|-direnv) filter="${1#-}" ;;
+    *) echo "Usage: cheat [-git|-tmux|-nix|-atuin|-direnv]"; exit 1 ;;
+  esac
+fi
+
+show_git() {
+  cat <<'EOF'
+======================== Git ========================
+Aliases:
+  gst          → git status
+  gco <br>     → git checkout
+  gcb <name>   → git checkout -b <name>
+  gp           → git push
+  gpf          → git push --force-with-lease
+  gl           → git pull
+  gd           → git diff
+  glog         → git log --oneline --graph --decorate --all
+  grb          → git rebase
+  grbi         → git rebase -i
+  grba         → git rebase --abort
+  grbc         → git rebase --continue
+  gcn!         → git commit --amend --no-edit
+  ga / gaa     → git add [paths] / git add .
+  gcmsg "m"    → git commit -m "m"
+
+EOF
+}
+
+show_tmux() {
+  cat <<'EOF'
+======================== Tmux ========================
+Session management aliases:
+  t            → tmux
+  ta           → attach to existing, or create "main" if none
+  tn <name>    → new session named <name>
+  tls          → list sessions
+  tk <name>    → kill session <name>
+
+Navigation & splits (no prefix needed):
+  Ctrl+h/j/k/l → move focus left/down/up/right
+  Ctrl+|       → vertical split
+  Ctrl+-       → horizontal split
+
+Copy mode (vim):
+  prefix + [   → enter copy mode (prefix is Ctrl+a)
+  v / V        → begin selection / select line
+  y            → yank selection
+  /, ?, n, N   → search forward/backward, next/prev
+
+Misc:
+  prefix + d   → detach
+  History      → 50,000 lines
+  Resurrect    → sessions auto-saved every 10 minutes; auto-restore on start
+EOF
+}
+
+show_nix() {
+  cat <<'EOF'
+======================== Nix ========================
+Project aliases:
+  nrs          → sudo darwin-rebuild switch --flake ~/.config/nix-config#<hostname>
+  nfmt         → nix fmt (formats the flake using nixfmt-tree)
+  nlint        → statix check && deadnix  (lint)
+
+Notes:
+  - Formatter: nixfmt-tree via flake formatter
+  - Linters: statix (style), deadnix (unused bindings)
+EOF
+}
+
+show_atuin() {
+  cat <<'EOF'
+======================== Atuin ========================
+History search:
+  arrow up     → fuzzy search history (integrated with zsh)
+  atuin search → full-screen TUI
+  atuin stats  → command usage stats
+
+Notes:
+  - Daemon enabled; search mode: daemon-fuzzy
+EOF
+}
+
+show_direnv() {
+  cat <<'EOF'
+======================== direnv ========================
+Project env:
+  direnv allow → allow .envrc in current dir
+  direnv deny  → revoke permission
+  direnv reload→ reload environment
+
+Notes:
+  - nix-direnv enabled; integrates with flakes automatically
+EOF
+}
+
+if [[ -z "$filter" || "$filter" == "git" ]];   then show_git;   fi
+if [[ -z "$filter" || "$filter" == "tmux" ]];  then show_tmux;  fi
+if [[ -z "$filter" || "$filter" == "nix" ]];   then show_nix;   fi
+if [[ -z "$filter" || "$filter" == "atuin" ]]; then show_atuin; fi
+if [[ -z "$filter" || "$filter" == "direnv" ]]; then show_direnv; fi
