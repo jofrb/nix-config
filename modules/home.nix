@@ -10,6 +10,11 @@
   home.username = "froeb";
   home.homeDirectory = "/Users/froeb";
 
+  # ── PATH additions ────────────────────────────────────────────────────────────
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   # ── Environment variables ─────────────────────────────────────────────────────
   home.sessionVariables = {
     DOCKER_DEFAULT_PLATFORM = "linux/amd64";
@@ -31,6 +36,8 @@
     statix # nix linters
     deadnix # nix linters
     pkgs.nerd-fonts.jetbrains-mono
+    pkgs.tmuxPlugins.resurrect
+    pkgs.tmuxPlugins.continuum
   ];
 
   # ── zsh ──────────────────────────────────────────────────────────────────────
@@ -51,6 +58,11 @@
       nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName)";
       nfmt = "nix fmt ~/.config/nix-config";
       nlint = "statix check ~/.config/nix-config && deadnix ~/.config/nix-config";
+      t = "tmux";
+      ta = "tmux attach || tmux new -s main";
+      tn = "tmux new -s";
+      tls = "tmux list-sessions";
+      tk = "tmux kill-session -t";
       cat = "bat";
       ls = "eza --icons";
       ll = "eza -lah --icons";
@@ -89,7 +101,37 @@
   # ── Tmux ──────────────────────────────────────────────────────────────────────
   programs.tmux = {
     enable = true;
-    mouse = true; # enables mouse scrolling
+    mouse = true;
+    historyLimit = 50000;
+    keyMode = "vi";
+    prefix = "C-a";
+    terminal = "screen-256color";
+
+    extraConfig = ''
+      # ── Splits ────────────────────────────────────────────────────────────────────────
+      bind-key C-| split-window -h -c "#{pane_current_path}"
+      bind-key C-- split-window -v -c "#{pane_current_path}"
+      unbind '"'
+      unbind %
+
+      # ── Pane navigation (no prefix needed) ──────────────────────────────────────────
+      bind-key -n C-h select-pane -L
+      bind-key -n C-j select-pane -D
+      bind-key -n C-k select-pane -U
+      bind-key -n C-l select-pane -R
+
+      # ── Copy mode vim bindings ───────────────────────────────────────────────────────────
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi V send-keys -X select-line
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+
+      # ── Resurrect & Continuum ─────────────────────────────────────────────────────────────
+      run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
+      run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
+      set -g @continuum-restore 'on'
+      set -g @continuum-save-interval '10'
+    '';
   };
 
   # ── starship prompt ───────────────────────────────────────────────────────────
@@ -251,6 +293,12 @@
   };
 
   # ── Application configs  ─────────────────────────────────────────────────────
+  # ── Cheat script ──────────────────────────────────────────────────────────────
+  home.file.".local/bin/cheat" = {
+    source = ../scripts/cheat;
+    executable = true;
+  };
+
   home.file."Library/Application Support/com.mitchellh.ghostty/config.ghostty".source =
     ../configs/ghostty;
 }
