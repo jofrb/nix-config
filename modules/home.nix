@@ -35,8 +35,6 @@
     statix # nix linters
     deadnix # nix linters
     pkgs.nerd-fonts.jetbrains-mono
-    pkgs.tmuxPlugins.resurrect
-    pkgs.tmuxPlugins.continuum
   ];
 
   # ── zsh ──────────────────────────────────────────────────────────────────────
@@ -124,13 +122,18 @@
       bind-key -T copy-mode-vi V send-keys -X select-line
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-
-      # ── Resurrect & Continuum ─────────────────────────────────────────────────────────────
-      run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
-      run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
-      set -g @continuum-restore 'on'
-      set -g @continuum-save-interval '10'
     '';
+
+    plugins = with pkgs.tmuxPlugins; [
+      resurrect
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '10'
+        '';
+      }
+    ];
   };
 
   # ── starship prompt ───────────────────────────────────────────────────────────
