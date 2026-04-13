@@ -19,7 +19,6 @@
   home.sessionVariables = {
     DOCKER_DEFAULT_PLATFORM = "linux/amd64";
     LANG = "en_US.UTF-8";
-    CLOUD_SQL_PATH_PREFIX = "/Users/froeb/temp";
   };
 
   # ── CLI packages ─────────────────────────────────────────────────────────────
