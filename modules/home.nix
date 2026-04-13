@@ -106,8 +106,8 @@
 
     extraConfig = ''
       # ── Splits ────────────────────────────────────────────────────────────────────────
-      bind-key -n C-| split-window -h -c "#{pane_current_path}"
-      bind-key -n C-- split-window -v -c "#{pane_current_path}"
+      bind-key -n 'M-|' split-window -h -c "#{pane_current_path}"
+      bind-key -n 'M-_' split-window -v -c "#{pane_current_path}"
       unbind '"'
       unbind %
 

@@ -36,6 +36,8 @@ EOF
 show_tmux() {
   cat <<'EOF'
 ======================== Tmux ========================
+Prefix: Ctrl+a
+
 Session management aliases:
   t            → tmux
   ta           → attach to existing, or create "main" if none
@@ -43,13 +45,18 @@ Session management aliases:
   tls          → list sessions
   tk <name>    → kill session <name>
 
+Session restore (after reboot/kill):
+  tmux kill-server → kill all sessions
+  ta               → attach to existing session, or create "main"
+  prefix + s       → switch between sessions (from inside tmux)
+
 Navigation & splits (no prefix needed):
   Ctrl+h/j/k/l → move focus left/down/up/right
-  Ctrl+|       → vertical split
-  Ctrl+-       → horizontal split
+  Alt+|        → vertical split
+  Alt+-        → horizontal split
 
 Copy mode (vim):
-  prefix + [   → enter copy mode (prefix is Ctrl+a)
+  prefix + [   → enter copy mode
   v / V        → begin selection / select line
   y            → yank selection
   /, ?, n, N   → search forward/backward, next/prev
