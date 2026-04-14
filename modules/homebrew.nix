@@ -31,6 +31,7 @@ _:
       "remarkable"
       "slack"
       "zed"
+      "chatgpt"
     ];
 
     brews = [
