@@ -56,8 +56,11 @@ _:
       TrackpadRightClick = true;
     };
 
-    screensaver.askForPasswordDelay = 28800;
+    screensaver.askForPasswordDelay = 0;
   };
+
+  # ── Security ─────────────────────────────────────────────────────────────────
+  security.pam.enableSudoTouchIdAuth = true;
 
   system.keyboard = {
     enableKeyMapping = true;
