@@ -57,6 +57,8 @@ _:
     };
 
     screensaver.askForPasswordDelay = 0;
+
+    CustomUserPreferences."com.apple.screensaver".idleTime = 120;
   };
 
   # ── Security ─────────────────────────────────────────────────────────────────
