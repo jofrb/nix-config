@@ -47,11 +47,12 @@ _:
       PMPrintingExpandedStateForPrint = true;
       "com.apple.trackpad.scaling" = 3.0;
       "com.apple.swipescrolldirection" = true;
+      "com.apple.springing.enabled" = true;
+      "com.apple.springing.delay" = 0.1;
     };
 
     trackpad = {
       Clicking = true;
-      TrackpadThreeFingerDrag = true;
       TrackpadRightClick = true;
     };
 
