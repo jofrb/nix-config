@@ -56,13 +56,6 @@ _:
     };
 
     screensaver.askForPasswordDelay = 0;
-
-    CustomUserPreferences = {
-      "com.apple.AppleMultitouchTrackpad" = {
-        TrackpadThreeFingerVertSwipeGesture = 2; # App Exposé with 3 fingers
-        TrackpadFourFingerVertSwipeGesture = 0;
-      };
-    };
   };
 
   system.keyboard = {
