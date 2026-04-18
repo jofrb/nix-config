@@ -56,7 +56,7 @@ _:
       TrackpadRightClick = true;
     };
 
-    screensaver.askForPasswordDelay = 0;
+    screensaver.askForPasswordDelay = 28800;
   };
 
   system.keyboard = {
