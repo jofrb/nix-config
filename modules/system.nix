@@ -56,7 +56,16 @@ _:
       TrackpadRightClick = true;
     };
 
-    screensaver.askForPasswordDelay = 0;
+    screensaver = {
+      askForPassword = true;
+      askForPasswordDelay = 0;
+    };
+
+    CustomUserPreferences = {
+      "com.apple.screensaver" = {
+        idleTime = 120; # 2 minutes
+      };
+    };
   };
 
   system.keyboard = {
