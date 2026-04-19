@@ -66,6 +66,13 @@ _:
 
   system.primaryUser = "froeb";
 
+  # ── TouchID for sudo ─────────────────────────────────────────────────────────────
+  # reattach fixes TouchID inside tmux (pam_reattach)
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
+
   # ── Users ────────────────────────────────────────────────────────────────────────
   users.users.froeb = {
     name = "froeb";
