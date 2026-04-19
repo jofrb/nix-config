@@ -61,11 +61,6 @@ _:
       askForPasswordDelay = 0;
     };
 
-    CustomUserPreferences = {
-      "com.apple.screensaver" = {
-        idleTime = 120; # 2 minutes
-      };
-    };
   };
 
   system.keyboard = {
@@ -87,6 +82,13 @@ _:
     name = "froeb";
     home = "/Users/froeb";
   };
+
+  # ── Display sleep ────────────────────────────────────────────────────────────
+  # nix-darwin has no native option for displaysleep — use pmset directly.
+  system.activationScripts.displaySleep.text = ''
+    pmset -b displaysleep 2
+    pmset -c displaysleep 2
+  '';
 
   # ── System state version ─────────────────────────────────────────────────────
   # Do not change after initial install.
