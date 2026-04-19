@@ -70,6 +70,7 @@
       ga = "git add ";
       gaa = "git add .";
       gco = "git checkout";
+      gcm = "git checkout main";
       gcb = "git checkout -b";
       gp = "git push";
       gpf = "git push --force-with-lease";
