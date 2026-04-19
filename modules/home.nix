@@ -34,6 +34,7 @@
     ripgrep # better grep
     statix # nix linters
     deadnix # nix linters
+    nix-output-monitor # better nix build output (nom)
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
@@ -52,7 +53,7 @@
     };
 
     shellAliases = {
-      nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName)";
+      nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName) |& nom";
       nfmt = "nix fmt ~/.config/nix-config";
       nlint = "statix check ~/.config/nix-config && deadnix ~/.config/nix-config";
       t = "tmux";
