@@ -88,6 +88,13 @@
   system.activationScripts.postActivation.text = lib.mkAfter ''
     pmset -b displaysleep 2
     pmset -c displaysleep 2
+
+    # ── SmartCard / YubiKey PIV policy ───────────────────────────────────────
+    # Allow YubiKey PIV as a login factor without enforcing it.
+    # Password remains a fallback; enforceSmartCard must stay false.
+    defaults write /Library/Preferences/com.apple.security.smartcard allowSmartCard -bool true
+    defaults write /Library/Preferences/com.apple.security.smartcard enforceSmartCard -bool false
+    defaults write /Library/Preferences/com.apple.security.smartcard userPairing -bool true
   '';
 
   # ── System state version ─────────────────────────────────────────────────────
