@@ -1,4 +1,4 @@
-_:
+{ lib, ... }:
 
 {
   # ── Nix daemon ──────────────────────────────────────────────
@@ -85,7 +85,7 @@ _:
 
   # ── Display sleep ────────────────────────────────────────────────────────────
   # nix-darwin has no native option for displaysleep — use pmset directly.
-  system.activationScripts.displaySleep.text = ''
+  system.activationScripts.postActivation.text = lib.mkAfter ''
     pmset -b displaysleep 2
     pmset -c displaysleep 2
   '';
