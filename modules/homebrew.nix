@@ -36,6 +36,7 @@ _:
 
     brews = [
       "mas"
+      "ykman"
     ];
 
     masApps = {
