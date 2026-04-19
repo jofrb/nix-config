@@ -52,7 +52,7 @@
     };
 
     shellAliases = {
-      nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName)";
+      nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName) |& nom";
       nfmt = "nix fmt ~/.config/nix-config";
       nlint = "statix check ~/.config/nix-config && deadnix ~/.config/nix-config";
       t = "tmux";
