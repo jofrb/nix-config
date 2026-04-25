@@ -50,10 +50,13 @@ Session restore (after reboot/kill):
   ta               → attach to existing session, or create "main"
   prefix + s       → switch between sessions (from inside tmux)
 
-Navigation & splits (no prefix needed):
-  Ctrl+h/j/k/l → move focus left/down/up/right
-  Alt+|        → vertical split
-  Alt+-        → horizontal split
+Pane control:
+  prefix + x → kill pane
+
+Navigation (no prefix needed):
+  ⌃+h/j/k/l  → move focus left/down/up/right
+  ⎇+|       → vertical split
+  ⎇+-       → horizontal split
 
 Copy mode (vim):
   prefix + [   → enter copy mode
