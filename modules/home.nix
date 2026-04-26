@@ -82,6 +82,7 @@
       grba = "git rebase --abort";
       grbc = "git rebase --continue";
       "gcn!" = "git commit --amend --no-edit";
+      docker = "podman";
     };
 
     initContent = ''
