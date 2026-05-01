@@ -36,6 +36,7 @@
     deadnix # nix linters
     nix-output-monitor # better nix build output (nom)
     pkgs.nerd-fonts.jetbrains-mono
+    (pkgs.writeShellScriptBin "docker" ''exec ${pkgs.podman}/bin/podman "$@"'')
   ];
 
   # ── zsh ──────────────────────────────────────────────────────────────────────
@@ -82,7 +83,6 @@
       grba = "git rebase --abort";
       grbc = "git rebase --continue";
       "gcn!" = "git commit --amend --no-edit";
-      docker = "podman";
     };
 
     initContent = ''
@@ -271,6 +271,22 @@
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
       init.defaultBranch = "main";
+    };
+  };
+
+  # ── SSH ───────────────────────────────────────────────────────────────────────
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "strutserver" = {
+        hostname = "192.168.88.6";
+        user = "u1frob";
+        identityFile = "~/.ssh/johan@strutserver.pub";
+        extraOptions = {
+          IdentityAgent = "/Users/${config.home.username}/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock";
+          IdentitiesOnly = "yes";
+        };
+      };
     };
   };
 
