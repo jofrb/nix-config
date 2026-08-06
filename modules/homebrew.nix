@@ -33,6 +33,7 @@ _:
       "zed"
       "chatgpt"
       "yubico-authenticator"
+      "tor-browser"
     ];
 
     brews = [
