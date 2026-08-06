@@ -32,6 +32,7 @@ _:
       "slack"
       "zed"
       "chatgpt"
+      "yubico-authenticator"
     ];
 
     brews = [
