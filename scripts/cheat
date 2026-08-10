@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # cheat: Quick reference for common commands and aliases
-# Usage: cheat [-git|-tmux|-nix|-atuin|-direnv]
+# Usage: cheat [-git|-tmux|-nix|-atuin|-direnv|-starship]
 
 filter=""
 if [[ $# -gt 0 ]]; then
   case "$1" in
-    -git|-tmux|-nix|-atuin|-direnv) filter="${1#-}" ;;
-    *) echo "Usage: cheat [-git|-tmux|-nix|-atuin|-direnv]"; exit 1 ;;
+    -git|-tmux|-nix|-atuin|-direnv|-starship) filter="${1#-}" ;;
+    *) echo "Usage: cheat [-git|-tmux|-nix|-atuin|-direnv|-starship]"; exit 1 ;;
   esac
 fi
 
@@ -111,8 +111,33 @@ Notes:
 EOF
 }
 
+show_starship() {
+  cat <<'EOF'
+======================== Starship prompt ========================
+Left prompt symbols:
+   <user>      → username (only shown when SSH or root)
+  @<host>      → hostname (only shown when SSH)
+   <path>      → current directory
+   <branch>    → git branch
+  ⇡<n>         → commits ahead of upstream
+  ⇣<n>         → commits behind upstream
+  ⇕⇡<n>⇣<n>    → diverged (ahead & behind)
+  !<n>         → modified files
+  ?<n>         → untracked files
+  +<n>         → staged files
+  ✘<n>         → deleted files
+  $<n>         → stashed changes (git_status default, not set in home.nix)
+   <ver>       → Node.js version (when in a JS project)
+   <ctx>       → Docker context (when Docker files present)
+   <state>     → Nix shell active (name shown if set)
+  took <dur>   → last command duration (only if >2s)
+  ❯            → prompt character (green = success, red = last command failed)
+EOF
+}
+
 if [[ -z "$filter" || "$filter" == "git" ]];   then show_git;   fi
 if [[ -z "$filter" || "$filter" == "tmux" ]];  then show_tmux;  fi
 if [[ -z "$filter" || "$filter" == "nix" ]];   then show_nix;   fi
 if [[ -z "$filter" || "$filter" == "atuin" ]]; then show_atuin; fi
 if [[ -z "$filter" || "$filter" == "direnv" ]]; then show_direnv; fi
+if [[ -z "$filter" || "$filter" == "starship" ]]; then show_starship; fi
