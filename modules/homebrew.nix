@@ -34,6 +34,7 @@ _:
       "chatgpt"
       "yubico-authenticator"
       "tor-browser"
+      "citrix-workspace"
     ];
 
     brews = [
