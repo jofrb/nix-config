@@ -54,7 +54,12 @@
     };
 
     shellAliases = {
-      nrs = "sudo darwin-rebuild switch --flake ~/.config/nix-config#$(scutil --get LocalHostName) |& nom";
+      # `darwin-rebuild switch` builds fine but its nested
+      # `sudo -> launchctl asuser` per-user home-manager activation silently
+      # no-ops on this macOS version (system + user files stay stale even
+      # though the build itself is fresh). Build then activate directly
+      # instead of going through the `switch` wrapper.
+      nrs = "OUT=$(nix build --no-link --print-out-paths --refresh ~/.config/nix-config#darwinConfigurations.$(scutil --get LocalHostName).system) && sudo $OUT/activate";
       nfmt = "nix fmt ~/.config/nix-config";
       nlint = "statix check ~/.config/nix-config && deadnix ~/.config/nix-config";
       t = "tmux";
@@ -95,6 +100,17 @@
       if [[ -S "$_bw_sock" ]]; then
         export SSH_AUTH_SOCK="$_bw_sock"
       fi
+
+      # `nix develop` normally drops into a bare bash shell with bash's own
+      # prompt. Force it into zsh instead, pinned to our own starship config,
+      # so the customized prompt (incl. the $nix_shell segment) is always used.
+      nix() {
+        if [[ "$1" == "develop" ]]; then
+          STARSHIP_CONFIG="$HOME/.config/starship.toml" command nix "$@" --command zsh
+        else
+          command nix "$@"
+        fi
+      }
     '';
   };
 
@@ -191,7 +207,8 @@
       nix_shell = {
         symbol = " ";
         style = "bold cyan";
-        format = "[$symbol$state( \\($name\\))]($style) ";
+        format = "[$symbol$state( \\($name\\))( lvl:$level)]($style) ";
+        heuristic = true; # also detect `nix shell` (not just nix-shell/nix develop)
       };
 
       cmd_duration = {

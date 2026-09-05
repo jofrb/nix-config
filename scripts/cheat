@@ -75,13 +75,18 @@ show_nix() {
   cat <<'EOF'
 ======================== Nix ========================
 Project aliases:
-  nrs          → sudo darwin-rebuild switch --flake ~/.config/nix-config#<hostname>
+  nrs          → nix build .../darwinConfigurations.<hostname>.system, then
+                 sudo <out>/activate directly
   nfmt         → nix fmt (formats the flake using nixfmt-tree)
   nlint        → statix check && deadnix  (lint)
 
 Notes:
   - Formatter: nixfmt-tree via flake formatter
   - Linters: statix (style), deadnix (unused bindings)
+  - nrs skips `darwin-rebuild switch`: its nested sudo -> launchctl asuser
+    per-user home-manager activation silently no-ops on this macOS version
+    (build succeeds, system/user files never actually update). Building and
+    running <out>/activate directly is the reliable path.
 EOF
 }
 
@@ -129,9 +134,17 @@ Left prompt symbols:
   $<n>         → stashed changes (git_status default, not set in home.nix)
    <ver>       → Node.js version (when in a JS project)
    <ctx>       → Docker context (when Docker files present)
-   <state>     → Nix shell active (name shown if set)
+   <state>     → Nix shell active: pure/impure/unknown (name and level shown if set)
   took <dur>   → last command duration (only if >2s)
   ❯            → prompt character (green = success, red = last command failed)
+
+Nix shell notes:
+  - heuristic detection on: also flags `nix shell` (not just nix-shell/nix develop)
+  - lvl:<n>    → nesting depth (NIX_SHELL_LEVEL), shown when >0
+  - (<name>)   → shown when the devshell's `name` attr is set (mkShell { name = "..."; })
+  - `nix develop` is wrapped in .zshrc to always exec into zsh with our
+    starship config (STARSHIP_CONFIG pinned to ~/.config/starship.toml),
+    instead of the plain bash prompt Nix uses by default
 EOF
 }
 
