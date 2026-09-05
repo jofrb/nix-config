@@ -188,7 +188,7 @@
       };
 
       git_branch = {
-        symbol = " ";
+        symbol = " ";
         style = "bold purple";
         format = "[$symbol$branch]($style) ";
       };
@@ -205,7 +205,7 @@
       };
 
       nix_shell = {
-        symbol = " ";
+        symbol = " ";
         style = "bold cyan";
         format = "[$symbol$state( \\($name\\))( lvl:$level)]($style) ";
         heuristic = true; # also detect `nix shell` (not just nix-shell/nix develop)
@@ -235,13 +235,13 @@
       };
 
       nodejs = {
-        symbol = " ";
+        symbol = " ";
         style = "bold green";
         format = "[$symbol$version]($style) ";
       };
 
       docker_context = {
-        symbol = " ";
+        symbol = " ";
         style = "bold blue";
         format = "[$symbol$context]($style) ";
         only_with_files = true;
