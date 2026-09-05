@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # cheat: Quick reference for common commands and aliases
-# Usage: cheat [-git|-tmux|-nix|-atuin|-direnv|-starship]
+# Usage: cheat [-git|-tmux|-nix|-atuin|-direnv|-starship|-vim]
 
 filter=""
 if [[ $# -gt 0 ]]; then
   case "$1" in
-    -git|-tmux|-nix|-atuin|-direnv|-starship) filter="${1#-}" ;;
-    *) echo "Usage: cheat [-git|-tmux|-nix|-atuin|-direnv|-starship]"; exit 1 ;;
+    -git|-tmux|-nix|-atuin|-direnv|-starship|-vim) filter="${1#-}" ;;
+    *) echo "Usage: cheat [-git|-tmux|-nix|-atuin|-direnv|-starship|-vim]"; exit 1 ;;
   esac
 fi
 
@@ -148,9 +148,60 @@ Nix shell notes:
 EOF
 }
 
+show_vim() {
+  cat <<'EOF'
+======================== Vim basics ========================
+Modes:
+  i / a        → insert before / after cursor
+  I / A        → insert at line start / end
+  o / O        → open new line below / above
+  Esc / ⌃+[    → back to normal mode
+  v / V / ⌃+v  → visual / visual line / visual block
+
+Movement (normal mode):
+  h j k l      → left/down/up/right
+  w / b        → next / previous word start
+  e            → end of word
+  0 / ^ / $    → line start / first non-blank / line end
+  gg / G       → first / last line
+  <n>G, :<n>   → go to line <n>
+  }/{          → next / previous paragraph
+  %            → jump to matching bracket
+  ⌃+f / ⌃+b    → page down / up
+  ⌃+d / ⌃+u    → half page down / up
+
+Search:
+  /pat, ?pat   → search forward / backward
+  n / N        → repeat search same / opposite direction
+  *  / #       → search word under cursor forward / backward
+
+Editing:
+  x / X        → delete char under / before cursor
+  dd / yy      → delete / yank (copy) line
+  dw / yw      → delete / yank word
+  d$ / d0      → delete to end / start of line
+  p / P        → paste after / before cursor
+  u / ⌃+r      → undo / redo
+  .            → repeat last change
+  cw / ciw     → change word / change inner word
+  r<char>      → replace char under cursor
+
+Counts & combos (verb + count + motion):
+  3dd          → delete 3 lines
+  2w           → move forward 2 words
+  d3w          → delete 3 words
+
+Save/quit:
+  :w / :q      → write / quit
+  :wq / :x     → write and quit
+  :q!          → quit without saving
+EOF
+}
+
 if [[ -z "$filter" || "$filter" == "git" ]];   then show_git;   fi
 if [[ -z "$filter" || "$filter" == "tmux" ]];  then show_tmux;  fi
 if [[ -z "$filter" || "$filter" == "nix" ]];   then show_nix;   fi
 if [[ -z "$filter" || "$filter" == "atuin" ]]; then show_atuin; fi
 if [[ -z "$filter" || "$filter" == "direnv" ]]; then show_direnv; fi
 if [[ -z "$filter" || "$filter" == "starship" ]]; then show_starship; fi
+if [[ -z "$filter" || "$filter" == "vim" ]]; then show_vim; fi
