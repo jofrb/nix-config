@@ -26,6 +26,7 @@ _:
       "linear-linear"
       "messenger"
       "notion"
+      "whatsapp"
       "obsidian"
       "raycast"
       "remarkable"
