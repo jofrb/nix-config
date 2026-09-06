@@ -23,7 +23,7 @@ _:
       "google-chrome"
       "google-drive"
       "gpg-suite"
-      "linear-linear"
+      "linear"
       "messenger"
       "notion"
       "whatsapp"
