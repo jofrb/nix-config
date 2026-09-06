@@ -288,6 +288,7 @@
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
       init.defaultBranch = "main";
+      core.editor = "vim";
     };
   };
 
