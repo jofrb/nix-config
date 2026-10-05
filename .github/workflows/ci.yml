@@ -5,13 +5,19 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   nix-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+      - uses: DeterminateSystems/flakehub-cache-action@88740a21e786360ba66bdd8fecabcbf852db3a5a # v3.23.0
 
       - name: fmt
         run: nix run nixpkgs#nixfmt-tree -- --ci
@@ -25,14 +31,32 @@ jobs:
       - name: flake check
         run: nix flake check --no-build
 
+      - name: shellcheck
+        run: nix run nixpkgs#shellcheck -- scripts/bootstrap.sh scripts/cheat
+
   secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
 
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+      - uses: DeterminateSystems/flakehub-cache-action@88740a21e786360ba66bdd8fecabcbf852db3a5a # v3.23.0
 
       - name: gitleaks
         run: nix run nixpkgs#gitleaks -- detect --source . --redact -v
+
+  workflow-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+      - uses: DeterminateSystems/flakehub-cache-action@88740a21e786360ba66bdd8fecabcbf852db3a5a # v3.23.0
+
+      - name: zizmor
+        run: nix run nixpkgs#zizmor -- --min-severity medium .github/workflows/
