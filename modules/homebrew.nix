@@ -48,6 +48,7 @@ _:
       "Wipr 2" = 1662217862;
       "Xerox Print and Scan" = 6443456959;
       "Be Focused - Pomodoro Timer" = 973134470;
+      "reMarkable" = 1276493162;
     };
   };
 }
