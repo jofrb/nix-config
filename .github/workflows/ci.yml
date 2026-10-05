@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  nix-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: fmt
+        run: nix fmt -- --ci
+
+      - name: statix
+        run: nix run nixpkgs#statix -- check
+
+      - name: deadnix
+        run: nix run nixpkgs#deadnix -- --fail .
+
+      - name: flake check
+        run: nix flake check --no-build
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: gitleaks
+        run: nix run nixpkgs#gitleaks -- detect --source . --redact -v
