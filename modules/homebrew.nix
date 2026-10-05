@@ -11,31 +11,24 @@ _:
     };
 
     casks = [
-      "aldente"
       "bitwarden" # direct download — required for SSH agent (App Store version is sandboxed)
       "hyperkey"
       "bruno"
       "claude-code"
       "dropbox"
       "fluor"
-      "freecad"
       "ghostty"
       "google-chrome"
       "google-drive"
       "gpg-suite"
-      "linear"
-      "messenger"
-      "notion"
       "whatsapp"
       "obsidian"
       "raycast"
-      "remarkable"
       "slack"
       "zed"
       "chatgpt"
       "yubico-authenticator"
       "tor-browser"
-      "citrix-workspace"
     ];
 
     brews = [
