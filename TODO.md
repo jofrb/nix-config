@@ -1,3 +1,3 @@
 # TODO
 
-- Add `freecad` and `messenger` casks to a separate (non-default) profile.
+- Add `freecad` and `messenger` casks to `modules/netlight.nix` (Netlight profile).
