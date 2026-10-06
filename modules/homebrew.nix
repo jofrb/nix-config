@@ -39,7 +39,6 @@ _:
 
     masApps = {
       "No Distractions for YouTube" = 1482507016;
-      "NextDNS" = 1464122853;
       "OneDrive" = 823766827;
       "Tailscale" = 1475387142;
       "WireGuard" = 1451685025;
