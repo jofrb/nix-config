@@ -94,3 +94,13 @@ Remaining manual steps:
   - Run: gh auth login
   - Sign into other apps (Slack, Dropbox, etc.) as needed.
 EOF
+
+# ── 6. Offer a restart ────────────────────────────────────────────────────────
+# Key repeat, trackpad speed and dark mode only take full effect after a
+# restart. Read from /dev/tty so this works under `curl | bash` too.
+if [[ -r /dev/tty ]]; then
+  read -rp $'\nRestart now to apply all system settings? [y/N] ' answer </dev/tty || answer=""
+  if [[ "$answer" =~ ^[Yy]$ ]]; then
+    sudo shutdown -r now
+  fi
+fi

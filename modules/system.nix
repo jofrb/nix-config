@@ -56,6 +56,15 @@
       TrackpadRightClick = true;
     };
 
+    menuExtraClock = {
+      Show24Hour = true;
+      ShowAMPM = false;
+      ShowDate = 0; # 0 = when space allows
+      ShowDayOfWeek = true;
+      ShowSeconds = true;
+      FlashDateSeparators = false;
+    };
+
     screensaver = {
       askForPassword = true;
       askForPasswordDelay = 0;
@@ -88,6 +97,12 @@
   system.activationScripts.postActivation.text = lib.mkAfter ''
     pmset -b displaysleep 2
     pmset -c displaysleep 2
+
+    # ── Keyboard backlight: dim after 30s idle ───────────────────────────────
+    # Lives in root's CoreBrightness domain (activation runs as root).
+    # -dict-add preserves the rest of the KeyboardBacklight dict.
+    defaults write /var/root/Library/Preferences/com.apple.CoreBrightness "Keyboard Dim Time" -int 30
+    defaults write /var/root/Library/Preferences/com.apple.CoreBrightness KeyboardBacklight -dict-add KeyboardBacklightIdleDimTime -int 30
 
     # ── SmartCard / YubiKey PIV policy ───────────────────────────────────────
     # Allow YubiKey PIV as a login factor without enforcing it.
