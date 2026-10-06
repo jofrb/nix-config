@@ -65,7 +65,7 @@ else
   echo "Which profile should this machine use?"
   echo "  1) base"
   echo "  2) Netlight"
-  read -rp "> " choice
+  read -rp "> " choice </dev/tty
   case "$choice" in
     1) PROFILE="base" ;;
     2) PROFILE="Netlight" ;;
