@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
 
       - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
-      - uses: DeterminateSystems/flakehub-cache-action@88740a21e786360ba66bdd8fecabcbf852db3a5a # v3.23.0
+      - uses: DeterminateSystems/flakehub-cache-action@0975873945367f5239ebb5f49c133bf3543a08f6 # v3.23.1
 
       - name: fmt
         run: nix run nixpkgs#nixfmt-tree -- --ci
@@ -43,7 +43,7 @@ jobs:
           persist-credentials: false
 
       - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
-      - uses: DeterminateSystems/flakehub-cache-action@88740a21e786360ba66bdd8fecabcbf852db3a5a # v3.23.0
+      - uses: DeterminateSystems/flakehub-cache-action@0975873945367f5239ebb5f49c133bf3543a08f6 # v3.23.1
 
       - name: gitleaks
         run: nix run nixpkgs#gitleaks -- detect --source . --redact -v
@@ -56,7 +56,7 @@ jobs:
           persist-credentials: false
 
       - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
-      - uses: DeterminateSystems/flakehub-cache-action@88740a21e786360ba66bdd8fecabcbf852db3a5a # v3.23.0
+      - uses: DeterminateSystems/flakehub-cache-action@0975873945367f5239ebb5f49c133bf3543a08f6 # v3.23.1
 
       - name: zizmor
         run: nix run nixpkgs#zizmor -- --min-severity medium .github/workflows/
