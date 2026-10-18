@@ -75,6 +75,14 @@
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToEscape = false; # managed by Hyperkey
+    # macOS 27: Hyperkey no longer suppresses the Caps Lock toggle. Remap Caps Lock → F18
+    # at HID level so it never toggles; Hyperkey still picks it up as its trigger.
+    userKeyMapping = [
+      {
+        HIDKeyboardModifierMappingSrc = 30064771129; # 0x700000039 Caps Lock
+        HIDKeyboardModifierMappingDst = 30064771181; # 0x70000006D F18
+      }
+    ];
   };
 
   system.primaryUser = "froeb";
