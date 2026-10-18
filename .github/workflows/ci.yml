@@ -60,3 +60,19 @@ jobs:
 
       - name: zizmor
         run: nix run nixpkgs#zizmor -- --min-severity medium .github/workflows/
+
+  # Single required status check: branch protection only needs to name this
+  # job, so adding or renaming jobs above never requires touching repo settings.
+  ci-ok:
+    if: always()
+    needs: [nix-checks, secrets, workflow-lint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: all jobs succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "needs results: $RESULTS"
+          for r in $RESULTS; do
+            [[ "$r" == "success" ]] || exit 1
+          done
