@@ -94,11 +94,10 @@
       # Homebrew
       eval "$(/opt/homebrew/bin/brew shellenv)"
 
-      # Bitwarden SSH agent — resolve socket dynamically regardless of distribution/Team ID
+      # Bitwarden SSH agent — fixed socket path (no slow lsof scan).
       # Requires: Bitwarden Desktop → Settings → SSH Agent → enabled
-      _bw_sock=$(lsof -U 2>/dev/null | awk '/bitwarden-ssh-agent\.sock/ {print $NF; exit}')
-      if [[ -S "$_bw_sock" ]]; then
-        export SSH_AUTH_SOCK="$_bw_sock"
+      if [[ -S "$HOME/.bitwarden-ssh-agent.sock" ]]; then
+        export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
       fi
 
       # `nix develop` normally drops into a bare bash shell with bash's own
@@ -313,7 +312,7 @@
         HostName = "192.168.88.6";
         User = "u1frob";
         IdentityFile = "~/.ssh/johan@strutserver.pub";
-        IdentityAgent = "/Users/${config.home.username}/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock";
+        IdentityAgent = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
         IdentitiesOnly = "yes";
       };
     };
