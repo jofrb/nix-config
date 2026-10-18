@@ -32,7 +32,7 @@ jobs:
         run: nix flake check --no-build
 
       - name: shellcheck
-        run: nix run nixpkgs#shellcheck -- scripts/bootstrap.sh scripts/cheat
+        run: nix run nixpkgs#shellcheck -- scripts/bootstrap.sh scripts/cheat scripts/nrs
 
   secrets:
     runs-on: ubuntu-latest
