@@ -54,12 +54,6 @@
     };
 
     shellAliases = {
-      # `darwin-rebuild switch` builds fine but its nested
-      # `sudo -> launchctl asuser` per-user home-manager activation silently
-      # no-ops on this macOS version (system + user files stay stale even
-      # though the build itself is fresh). Build then activate directly
-      # instead of going through the `switch` wrapper.
-      nrs = "PROFILE=$(cat ~/.config/nix-darwin-profile 2>/dev/null || echo base); OUT=$(nix build --no-link --print-out-paths --refresh ~/.config/nix-config#darwinConfigurations.$PROFILE.system) && sudo $OUT/activate";
       nfmt = "nix fmt ~/.config/nix-config";
       nlint = "statix check ~/.config/nix-config && deadnix ~/.config/nix-config";
       t = "tmux";
@@ -345,6 +339,12 @@
   # ── Cheat script ──────────────────────────────────────────────────────────────
   home.file.".local/bin/cheat" = {
     source = ../scripts/cheat;
+    executable = true;
+  };
+
+  # ── nrs script ────────────────────────────────────────────────────────────────
+  home.file.".local/bin/nrs" = {
+    source = ../scripts/nrs;
     executable = true;
   };
 

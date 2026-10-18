@@ -29,7 +29,7 @@ Left manual afterwards, since they need interactive secrets:
 
 ## Day-to-day
 
-- `nrs` — rebuild and activate the current profile
+- `nrs` — script (`scripts/nrs`): rebuild and activate the current profile
 - `nfmt` — format the flake
 - `nlint` — lint (statix + deadnix)
 

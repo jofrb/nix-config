@@ -78,7 +78,7 @@ log "Using profile: $PROFILE"
 
 # ── 5. First nix-darwin activation ────────────────────────────────────────────
 # `darwin-rebuild switch`'s nested per-user home-manager activation silently
-# no-ops on this macOS version (see nrs alias comment in modules/home.nix).
+# no-ops on this macOS version (see scripts/nrs).
 # Build then activate directly instead.
 log "Building darwinConfigurations.$PROFILE..."
 OUT=$(nix build --no-link --print-out-paths --refresh "$REPO_DIR#darwinConfigurations.$PROFILE.system")
