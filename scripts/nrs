@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# nrs: rebuild and activate the current nix-darwin profile
+#
+# `darwin-rebuild switch` builds fine but its nested
+# `sudo -> launchctl asuser` per-user home-manager activation silently
+# no-ops on this macOS version (system + user files stay stale even
+# though the build itself is fresh). Build then activate directly
+# instead of going through the `switch` wrapper.
+set -euo pipefail
+
+profile=$(cat ~/.config/nix-darwin-profile 2>/dev/null || echo base)
+out=$(nix build --no-link --print-out-paths --refresh \
+  "$HOME/.config/nix-config#darwinConfigurations.$profile.system")
+sudo "$out/activate"

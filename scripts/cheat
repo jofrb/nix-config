@@ -74,16 +74,17 @@ EOF
 show_nix() {
   cat <<'EOF'
 ======================== Nix ========================
-Project aliases:
-  nrs          → nix build .../darwinConfigurations.<hostname>.system, then
-                 sudo <out>/activate directly
-  nfmt         → nix fmt (formats the flake using nixfmt-tree)
-  nlint        → statix check && deadnix  (lint)
+Project commands:
+  nrs          → (script) nix build .../darwinConfigurations.<profile>.system, then
+                 sudo <out>/activate directly (profile from
+                 ~/.config/nix-darwin-profile, default: base)
+  nfmt         → (alias) nix fmt (formats the flake using nixfmt-tree)
+  nlint        → (alias) statix check && deadnix  (lint)
 
 Notes:
   - Formatter: nixfmt-tree via flake formatter
   - Linters: statix (style), deadnix (unused bindings)
-  - nrs skips `darwin-rebuild switch`: its nested sudo -> launchctl asuser
+  - nrs (scripts/nrs) skips `darwin-rebuild switch`: its nested sudo -> launchctl asuser
     per-user home-manager activation silently no-ops on this macOS version
     (build succeeds, system/user files never actually update). Building and
     running <out>/activate directly is the reliable path.
