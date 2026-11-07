@@ -26,6 +26,18 @@
 - [ ] `system.defaults.CustomUserPreferences` for GUI apps (Magnet, Raycast, Hyperkey): anything set in the GUI but not exported is lost on reinstall
 - [ ] Secrets encryption: `age-plugin-yubikey` (PIV slot, PIN + touch) plus a second recipient (plain age key in Bitwarden or a 2nd YubiKey) so a lost key is not fatal; prefer `agenix` over `sops-nix` if it is more ergonomic with the plugin on darwin
 - [ ] Portability goal: whole machine reproducible from the repo (see notes below)
+- [ ] Investigate: `nrs` stalls at the Homebrew `bitwarden` cask step while Bitwarden is running. `upgrade = true` plus a `sudo touch` write-test on `/Applications/Bitwarden.app` left `sudo activate` waiting for a password (unconfirmed; check the terminal first)
+
+## Linux server (u1frob)
+
+- [ ] Add `homeConfigurations."<user>"` for `x86_64-linux` that imports `modules/home.nix`. `<user>` is the server user, `u1frob` per the homelab TODO
+- [ ] Remove the hardcoded `home.homeDirectory` (`/Users/froeb`). Guard the `/opt/homebrew/bin/brew shellenv` line to darwin only
+- [ ] Keep `system.nix`, `homebrew.nix`, and `netlight.nix` out of the Linux output
+- [ ] Check nixpkgs for `claude-code`, `gemini-cli`, `mosh`, `tmux`. Put them in the Linux home packages
+- [ ] Install Nix on Ubuntu with the multi-user installer, flakes enabled. Decide whether Ansible or a manual step does this
+- [ ] Bootstrap on server: read-only deploy key for `jofrb/nix-config`, `git clone`, then `nix run home-manager -- switch --flake .#<user>`
+- [ ] Server tracks `main`, not feature branches. `feat/zoxide` is still unmerged
+- [ ] CI: build the Linux home configuration alongside darwin in `.github/workflows/ci.yml`
 
 ## Notes
 
