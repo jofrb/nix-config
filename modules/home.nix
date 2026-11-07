@@ -335,6 +335,12 @@
     enableZshIntegration = true;
   };
 
+  # ── zoxide ────────────────────────────────────────────────────────────────────
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   # ── Application configs  ─────────────────────────────────────────────────────
   # ── Cheat script ──────────────────────────────────────────────────────────────
   home.file.".local/bin/cheat" = {

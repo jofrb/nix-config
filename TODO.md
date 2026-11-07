@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] `programs.zoxide`
+- [x] `programs.zoxide`
 - [ ] `programs.neovim` with `defaultEditor = true`
 - [ ] `programs.ssh`: `ControlMaster auto` + `ControlPersist 10m` (everything is currently off)
 - [ ] `sops-nix` or `agenix` for secrets (strutserver IP/user are plaintext in `home.nix`; low value, good exercise)
