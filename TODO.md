@@ -23,7 +23,7 @@
 - [ ] Dotfiles into Nix: `~/.aws/config` (config only, check for account IDs first), podman `containers.conf`/`registries.conf`
 - [ ] Secrets via sops-nix/agenix: `~/.npmrc` (plaintext `_authToken` for Artifact Registry; consider rotating), `~/.pgpass.dev`, `~/.pgpass.prod`
 - [ ] Clean up stale files: `.zprofile.backup`, `.gnupg_pre_2.1`, `.hawtjni`, `.ServiceHub`, `.node_repl_history`, `.viminfo`, `.zcompdump-*`, `~/.ssh/config.bak`, `~/.ssh/known_hosts.old` (inspect before deleting)
-- [ ] `system.defaults.CustomUserPreferences` for GUI apps (Raycast, Hyperkey): anything set in the GUI but not exported is lost on reinstall
+- [ ] `system.defaults.CustomUserPreferences` for GUI apps (Magnet, Raycast, Hyperkey): anything set in the GUI but not exported is lost on reinstall
 - [ ] Secrets encryption: `age-plugin-yubikey` (PIV slot, PIN + touch) plus a second recipient (plain age key in Bitwarden or a 2nd YubiKey) so a lost key is not fatal; prefer `agenix` over `sops-nix` if it is more ergonomic with the plugin on darwin
 - [ ] Portability goal: whole machine reproducible from the repo (see notes below)
 - [ ] Investigate: `nrs` stalls at the Homebrew `bitwarden` cask step while Bitwarden is running. `upgrade = true` plus a `sudo touch` write-test on `/Applications/Bitwarden.app` left `sudo activate` waiting for a password (unconfirmed; check the terminal first)
