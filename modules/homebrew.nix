@@ -42,6 +42,7 @@ _:
       "OneDrive" = 823766827;
       "WireGuard" = 1451685025;
       "Xcode" = 497799835;
+      "Magnet" = 441258766;
       "Wipr 2" = 1662217862;
       "Xerox Print and Scan" = 6443456959;
       "Be Focused - Pomodoro Timer" = 973134470;
